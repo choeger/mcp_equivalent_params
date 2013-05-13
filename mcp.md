@@ -132,7 +132,7 @@ connection and expressed manually at the instantiation site. This imposes two pr
 
 Via equivalence-equations, the above model can be simplified:
 
-```
+```Modelica
 model Network
   Element elem1, elem2;
   
@@ -214,7 +214,7 @@ read.
 
 This avoids problems like the above:
 
-```
+```Modelica
 model Network
   Element elem1, elem2(param = true);
   
@@ -250,7 +250,7 @@ equivalence classes manually.
 The following example demonstrates the usage of the library in a circuit where the wire has
 the same resistance:
 
-```
+```Modelica
   model CircuitWithFloatingResistance
 
     import de.tuberlin.uebb.equivalence.{EquivalenceCtxt, getParameter, setParameter, equivate};
@@ -314,6 +314,7 @@ the same resistance:
 
 The library works as follows:
 
+ * There needs to be exactly one equivalence context for the whole model
  * Equivalences are described along component names
  * The equivalence equations can be created anywhere in the model, but in current Modelica it
 is hard to manage the execution order of external functions. Thus, one has to fiddle with signals.
@@ -375,7 +376,7 @@ Add the following section to the specification:
 > If a connector contains parameters, every **```connect```**-equation involving the connector
 > implies an equivalence-equation containing the parameters. The following model:
 
-```
+```Modelica
       connector Port
         parameter Real prop;
         Real p;
@@ -391,7 +392,7 @@ Add the following section to the specification:
 
 > implicitly contains an equivalence-equation:
 
-```
+```Modelica
       model M
         Port p, n;
         equation
